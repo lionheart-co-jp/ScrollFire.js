@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Demo02 | ScrollFire</title>
+    <title>Demo04 | ScrollFire</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/demo02.css">
+    <link rel="stylesheet" href="./css/demo04.css">
 </head>
 <body>
 
     <div class="wrapper">
-        <h1>Demo 02</h1>
+        <h1>Demo 04</h1>
 
-        <p>jQuery Demo</p>
+        <p>Animation sample 02</p>
 
         <ul class="block-list">
             <li class="block">
@@ -62,7 +62,19 @@ fire.addTrigger(targets, function(el) {
 });
 fire.start();</code></pre>
         <h3>CSS</h3>
-        <pre><code class="css">.block {
+        <pre><code class="css">@keyframes bound {
+    0% { transform: scale(.1); }
+    12.5% { transform: scale(1.4); }
+    25% { transform: scale(.4); }
+    37.5% { transform: scale(1.2); }
+    50% { transform: scale(.8); }
+    62.5% { transform: scale(1.1); }
+    75% { transform: scale(.9); }
+    87.5% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.block {
     align-items: center;
     background: #eee;
     display: flex;
@@ -71,13 +83,12 @@ fire.start();</code></pre>
     list-style: none;
     margin: 0;
     padding: 0;
+    transform: scale(0);
     width: 100%;
-    opacity: 0;
-    transition: opacity .3s;
 }
-
-.block-view {
-    opacity: 1;
+.block-view:nth-child(n) {
+    animation: bound 2.2s ease-in-out;
+    transform: scale(1);
 }</code></pre>
     </div>
 

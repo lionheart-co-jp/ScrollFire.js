@@ -5,6 +5,8 @@
  * var fire = new ScrollFire();
  * fire.addTrigger(element, somethingFunction);
  * fire.start();
+ *
+ * @version 0.0.2
  */
 
 /**
@@ -100,14 +102,30 @@ if (!Array.prototype.filter){
         /**
          * Adding scroll fire trigger
          *
-         * @param jQuery Object $target
+         * @param Element | JQuery $target
          * @param Function callback
          */
-        public addTrigger(target: HTMLElement | JQuery, callback: Function): ScrollFire {
-            this.trigger.push({
-                target: target,
-                callback: callback
-            });
+        public addTrigger(target: Element | JQuery | NodeList, callback: Function): ScrollFire {
+            if((target as JQuery).each) {
+                (target as JQuery).each((i, el) => {
+                    this.trigger.push({
+                        target: $(el),
+                        callback: callback
+                    });
+                });
+            } else if((target as NodeList).item) {
+                (target as NodeList).forEach((el) => {
+                    this.trigger.push({
+                        target: el,
+                        callback: callback
+                    });
+                })
+            } else {
+                this.trigger.push({
+                    target: target,
+                    callback: callback
+                });
+            }
 
             return this
         }
@@ -119,7 +137,7 @@ if (!Array.prototype.filter){
          */
         private finishTrigger(indexes: number[]): ScrollFire {
             this.trigger =
-                this.trigger.filter(function(trigger, index) {
+                this.trigger.filter((trigger, index) => {
                     return indexes.indexOf(index) < 0
                 });
 
@@ -173,7 +191,7 @@ if (!Array.prototype.filter){
          * @param Element | jQuery Object element
          * via: jQuery.offset()
          */
-        private getOffsetTop(element: HTMLElement | JQuery) {
+        private getOffsetTop(element: Element | JQuery) {
             if(! element) {
                 return 0;
             }
@@ -187,12 +205,12 @@ if (!Array.prototype.filter){
                 return pos.top
             }
 
-            if(! (element as HTMLElement).getClientRects().length) {
+            if(! (element as Element).getClientRects().length) {
                 return 0;
             }
 
-            var rect = (element as HTMLElement).getBoundingClientRect();
-            var win = (element as HTMLElement).ownerDocument.defaultView;
+            var rect = (element as Element).getBoundingClientRect();
+            var win = (element as Element).ownerDocument.defaultView;
 
             return rect.top + win.pageYOffset;
         }

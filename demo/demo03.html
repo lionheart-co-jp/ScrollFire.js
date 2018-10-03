@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Demo02 | ScrollFire</title>
+    <title>Demo03 | ScrollFire</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/demo02.css">
+    <link rel="stylesheet" href="./css/demo03.css">
 </head>
 <body>
 
     <div class="wrapper">
-        <h1>Demo 02</h1>
+        <h1>Demo 03</h1>
 
-        <p>jQuery Demo</p>
+        <p>Animation sample 01</p>
 
         <ul class="block-list">
             <li class="block">
@@ -70,14 +70,20 @@ fire.start();</code></pre>
     justify-content: center;
     list-style: none;
     margin: 0;
-    padding: 0;
-    width: 100%;
     opacity: 0;
-    transition: opacity .3s;
+    padding: 0;
+    transition: .3s;
+    width: 100%;
 }
-
-.block-view {
+.block:nth-child(odd) {
+    transform: translateX(-100px);
+}
+.block:nth-child(even) {
+    transform: translateX(100px);
+}
+.block-view:nth-child(n) {
     opacity: 1;
+    transform: translateX(0);
 }</code></pre>
     </div>
 

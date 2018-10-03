@@ -61,7 +61,7 @@ fire.changePadding(100)
 Adding scroll fire trigger
 
 ```js
-ScrollFire.addTrigger(target: HTMLElement | JQuery, callback: Function) : ScrollFire
+ScrollFire.addTrigger(target: Element | NodeList | JQuery, callback: Function) : ScrollFire
 ```
 
 Callback's first argument is passed `target`.

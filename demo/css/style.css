@@ -9,24 +9,6 @@
     padding: 0;
 }
 
-.block {
-    align-items: center;
-    background: #eee;
-    display: flex;
-    height: 400px;
-    justify-content: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    opacity: 0;
-    transition: opacity .3s;
-}
-
-.block-view {
-    opacity: 1;
-}
-
 .block ~ .block {
     margin-top: 20px;
 }

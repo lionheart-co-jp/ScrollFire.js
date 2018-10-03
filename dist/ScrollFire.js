@@ -94,14 +94,33 @@ if (!Array.prototype.filter) {
         /**
          * Adding scroll fire trigger
          *
-         * @param jQuery Object $target
+         * @param Element | JQuery $target
          * @param Function callback
          */
         ScrollFire.prototype.addTrigger = function (target, callback) {
-            this.trigger.push({
-                target: target,
-                callback: callback
-            });
+            var _this = this;
+            if (target.each) {
+                target.each(function (i, el) {
+                    _this.trigger.push({
+                        target: $(el),
+                        callback: callback
+                    });
+                });
+            }
+            else if (target.item) {
+                target.forEach(function (el) {
+                    _this.trigger.push({
+                        target: el,
+                        callback: callback
+                    });
+                });
+            }
+            else {
+                this.trigger.push({
+                    target: target,
+                    callback: callback
+                });
+            }
             return this;
         };
         /**

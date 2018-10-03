@@ -2,6 +2,10 @@
 
 The class of method fired by scroll position.
 
+## Demo
+
+[Demo is here](http://p71.demo.develop.lionheart.co.jp/scrollfire/)
+
 ## How to use
 
 ```js
@@ -94,7 +98,3 @@ Stopping scroll fire action
 ```js
 ScrollFire.stop() : ScrollFire
 ```
-
-## Demo
-
-[Demo is here](http://p71.demo.develop.lionheart.co.jp/scrollfire/)

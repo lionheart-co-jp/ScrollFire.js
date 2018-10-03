@@ -1,0 +1,13 @@
+{
+  "name": "ScrollFire",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc && npm run compress",
+    "compress": "uglifyjs ./dist/ScrollFire.js -o ./dist/ScrollFire.min.js -c -m --source-map"
+  },
+  "devDependencies": {
+    "uglify-js": "^3.4.9"
+  }
+}

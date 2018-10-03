@@ -27,9 +27,9 @@ fire.addTrigger(target, someFunction);
 fire.start();
 ```
 
-### Vanila JS Support
+### Vanilla JS Support
 
-You can insert element as vanila js element too.
+You can insert element as Vanilla JS element too.
 
 ```js
 var target = document.getElementById('target');
@@ -94,3 +94,7 @@ Stopping scroll fire action
 ```js
 ScrollFire.stop() : ScrollFire
 ```
+
+## Demo
+
+[Demo is here](http://p71.demo.develop.lionheart.co.jp/scrollfire/)

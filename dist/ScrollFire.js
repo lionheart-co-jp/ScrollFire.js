@@ -13,7 +13,7 @@
 if (!Array.prototype.filter) {
     Array.prototype.filter = function (func, thisArg) {
         'use strict';
-        if (!((typeof func === 'Function' || typeof func === 'function') && this))
+        if (!((typeof func === 'function') && this))
             throw new TypeError();
         var len = this.length >>> 0, res = new Array(len), // preallocate array
         t = this, c = 0, i = -1;
@@ -40,51 +40,6 @@ if (!Array.prototype.filter) {
         res.length = c; // shrink down array to proper size
         return res;
     };
-}
-/**
- * Polyfill of Array.prototype.includes
- * via: https://tc39.github.io/ecma262/#sec-array.prototype.includes
- */
-if (!Array.prototype.includes) {
-    Object.defineProperty(Array.prototype, 'includes', {
-        value: function (searchElement, fromIndex) {
-            if (this == null) {
-                throw new TypeError('"this" is null or not defined');
-            }
-            // 1. Let O be ? ToObject(this value).
-            var o = Object(this);
-            // 2. Let len be ? ToLength(? Get(O, "length")).
-            var len = o.length >>> 0;
-            // 3. If len is 0, return false.
-            if (len === 0) {
-                return false;
-            }
-            // 4. Let n be ? ToInteger(fromIndex).
-            //    (If fromIndex is undefined, this step produces the value 0.)
-            var n = fromIndex | 0;
-            // 5. If n ≥ 0, then
-            //  a. Let k be n.
-            // 6. Else n < 0,
-            //  a. Let k be len + n.
-            //  b. If k < 0, let k be 0.
-            var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
-            function sameValueZero(x, y) {
-                return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
-            }
-            // 7. Repeat, while k < len
-            while (k < len) {
-                // a. Let elementK be the result of ? Get(O, ! ToString(k)).
-                // b. If SameValueZero(searchElement, elementK) is true, return true.
-                if (sameValueZero(o[k], searchElement)) {
-                    return true;
-                }
-                // c. Increase k by 1.
-                k++;
-            }
-            // 8. Return false
-            return false;
-        }
-    });
 }
 (function () {
     /**
@@ -115,6 +70,7 @@ if (!Array.prototype.includes) {
             this.trigger = [];
             this._flag = false;
             this._id = 0;
+            this.padding = 100;
         }
         /**
          * Starting scroll fire action
@@ -122,6 +78,7 @@ if (!Array.prototype.includes) {
         ScrollFire.prototype.start = function () {
             this._flag = true;
             this._id = animation_frame(this.handler.bind(this));
+            return this;
         };
         /**
          * Stopping scroll fire action
@@ -132,6 +89,7 @@ if (!Array.prototype.includes) {
                 cancel_frame(this._id);
                 this._id = 0;
             }
+            return this;
         };
         /**
          * Adding scroll fire trigger
@@ -144,6 +102,7 @@ if (!Array.prototype.includes) {
                 target: target,
                 callback: callback
             });
+            return this;
         };
         /**
          * Checking finished trigger and disabling it
@@ -155,6 +114,16 @@ if (!Array.prototype.includes) {
                 this.trigger.filter(function (trigger, index) {
                     return indexes.indexOf(index) < 0;
                 });
+            return this;
+        };
+        /**
+         * Change trigger position's padding
+         *
+         * @param number padding
+         */
+        ScrollFire.prototype.changePadding = function (padding) {
+            this.padding = padding;
+            return this;
         };
         /**
          * Checking scroll position and firing callback
@@ -167,7 +136,7 @@ if (!Array.prototype.includes) {
                 for (var i = 0; i < this.trigger.length; i += 1) {
                     var trigger = this.trigger[i];
                     var pos = this.getOffsetTop(trigger.target);
-                    if ((scrollPos + windowHeight / 2) + 100 > pos) {
+                    if ((scrollPos + windowHeight / 2) + this.padding > pos) {
                         if (typeof trigger.callback === 'function') {
                             trigger.callback(trigger.target);
                             finishedTriggers.push(i);
@@ -192,7 +161,11 @@ if (!Array.prototype.includes) {
             }
             // For jQuery Object
             if (element.offset && typeof element.offset === 'function') {
-                return element.offset().top;
+                var pos = element.offset();
+                if (!pos) {
+                    return 0;
+                }
+                return pos.top;
             }
             if (!element.getClientRects().length) {
                 return 0;

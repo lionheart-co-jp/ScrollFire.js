@@ -8,6 +8,7 @@
     "compress": "uglifyjs ./dist/ScrollFire.js -o ./dist/ScrollFire.min.js -c -m --source-map"
   },
   "devDependencies": {
+    "@types/jquery": "^3.3.10",
     "uglify-js": "^3.4.9"
   }
 }

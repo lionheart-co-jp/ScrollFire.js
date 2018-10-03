@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo01 | ScrollFire</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+    <div class="wrapper">
+        <h1>Demo 01</h1>
+
+        <p>Vanila JS Demo</p>
+
+        <ul class="block-list">
+            <li class="block">
+                Scroll display block
+            </li>
+            <li class="block">
+                Scroll display block
+            </li>
+            <li class="block">
+                Scroll display block
+            </li>
+            <li class="block">
+                Scroll display block
+            </li>
+            <li class="block">
+                Scroll display block
+            </li>
+            <li class="block">
+                Scroll display block
+            </li>
+            <li class="block">
+                Scroll display block
+            </li>
+            <li class="block">
+                Scroll display block
+            </li>
+            <li class="block">
+                Scroll display block
+            </li>
+            <li class="block">
+                Scroll display block
+            </li>
+        </ul>
+
+        <p class="end">End</p>
+
+        <h2>Source code</h2>
+        <h3>JavaScript</h3>
+        <pre><code class="javascript">var targets = document.querySelectorAll(&#039;.block&#039;);
+
+var fire = new ScrollFire();
+for(var i=0; i&lt;targets.length; i+=1) {
+    var target = targets[i];
+
+    fire.addTrigger(target, function(el) {
+        console.log(el);
+        el.classList.add(&#039;block-view&#039;);
+    });
+}
+fire.start();</code></pre>
+        <h3>CSS</h3>
+        <pre><code class="css">.block {
+    align-items: center;
+    background: #eee;
+    display: flex;
+    height: 400px;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity .3s;
+}
+
+.block-view {
+    opacity: 1;
+}</code></pre>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/css.min.js"></script>
+    <script src="../dist/ScrollFire.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+
+        var targets = document.querySelectorAll('.block');
+
+        var fire = new ScrollFire();
+        for(var i=0; i<targets.length; i+=1) {
+            var target = targets[i];
+
+            fire.addTrigger(target, function(el) {
+                console.log(el);
+                el.classList.add('block-view');
+            });
+        }
+        fire.start();
+    </script>
+</body>
+</html>

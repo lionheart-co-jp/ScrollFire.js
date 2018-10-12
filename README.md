@@ -48,10 +48,10 @@ fire.start();
 You can use method chaining
 
 ```js
-var fire = new ScrollFire();
-fire.changePadding(100)
+new ScrollFire()
+    .changePadding(100)
     .addTrigger(target, someFunction)
-    .start()
+    .start();
 ```
 
 ## Reference

@@ -4,7 +4,7 @@ The class of method fired by scroll position.
 
 ## Demo
 
-[Demo is here](http://p71.demo.develop.lionheart.co.jp/scrollfire/)
+[Demo is here](https://lionheart-co-jp.github.io/ScrollFire.js/)
 
 ## How to use
 

@@ -6,6 +6,8 @@
  * var fire = new ScrollFire();
  * fire.addTrigger(element, somethingFunction);
  * fire.start();
+ *
+ * @version 0.0.3
  */
 /**
  * Polyfill of Array.prototype.filter
@@ -102,7 +104,7 @@ if (!Array.prototype.filter) {
             if (target.each) {
                 target.each(function (i, el) {
                     _this.trigger.push({
-                        target: $(el),
+                        target: jQuery(el),
                         callback: callback
                     });
                 });
@@ -191,7 +193,7 @@ if (!Array.prototype.filter) {
             }
             var rect = element.getBoundingClientRect();
             var win = element.ownerDocument.defaultView;
-            return rect.top + win.pageYOffset;
+            return rect.top + ((win === null || win === void 0 ? void 0 : win.scrollY) || 0);
         };
         return ScrollFire;
     }());

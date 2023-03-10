@@ -6,7 +6,7 @@
  * fire.addTrigger(element, somethingFunction);
  * fire.start();
  *
- * @version 0.0.2
+ * @version 0.0.3
  */
 
 /**
@@ -109,7 +109,7 @@ if (!Array.prototype.filter){
             if((target as JQuery).each) {
                 (target as JQuery).each((i, el) => {
                     this.trigger.push({
-                        target: $(el),
+                        target: jQuery(el),
                         callback: callback
                     });
                 });
@@ -212,7 +212,7 @@ if (!Array.prototype.filter){
             var rect = (element as Element).getBoundingClientRect();
             var win = (element as Element).ownerDocument.defaultView;
 
-            return rect.top + win.pageYOffset;
+            return rect.top + (win?.scrollY || 0);
         }
     }
 

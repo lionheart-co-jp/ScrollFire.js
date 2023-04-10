@@ -1,5 +1,5 @@
 @keyframes bound {
-    0% { transform: scale(.1); }
+    0% { transform: scale(0); }
     12.5% { transform: scale(1.4); }
     25% { transform: scale(.4); }
     37.5% { transform: scale(1.2); }
@@ -11,18 +11,20 @@
 }
 
 .block {
-    align-items: center;
-    background: #eee;
-    display: flex;
-    height: 400px;
-    justify-content: center;
+    width: 100%;
     list-style: none;
     margin: 0;
     padding: 0;
-    transform: scale(0);
-    width: 100%;
 }
-.block-view:nth-child(n) {
+.block-inner {
+    transform: scale(0);
+    height: 400px;
+    background: #eee;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.block-view .block-inner {
     animation: bound 2.2s ease-in-out;
     transform: scale(1);
 }

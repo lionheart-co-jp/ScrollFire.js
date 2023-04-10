@@ -3,88 +3,41 @@
  *
  * # Sample
  * var fire = new ScrollFire();
- * fire.addTrigger(element, somethingFunction);
+ * fire.addTrigger(element, entryFunction, leaveFunction);
  * fire.start();
  *
- * @version 0.0.3
+ * @version 0.1.0
  */
-
-/**
- * Polyfill of Array.prototype.filter
- */
-if (!Array.prototype.filter){
-    Array.prototype.filter = function(func: Function, thisArg: any) {
-        'use strict';
-        if ( ! ((typeof func === 'function') && this) )
-            throw new TypeError();
-
-        var len = this.length >>> 0,
-            res = new Array(len), // preallocate array
-            t = this, c = 0, i = -1;
-        if (thisArg === undefined){
-            while (++i !== len){
-                // checks to see if the key was set
-                if (i in this){
-                    if (func(t[i], i, t)){
-                        res[c++] = t[i];
-                    }
-                }
-            }
-        }
-        else{
-            while (++i !== len){
-                // checks to see if the key was set
-                if (i in this){
-                    if (func.call(thisArg, t[i], i, t)){
-                        res[c++] = t[i];
-                    }
-                }
-            }
-        }
-
-        res.length = c; // shrink down array to proper size
-        return res;
-    };
-}
 
 (function() {
-    /**
-     * PolyFill of requestAnimationFrame
-     * If requestAnimationFrame is not available, using setTimeout instead of it
-     */
-    var animation_frame = window.requestAnimationFrame
-                    || window.webkitRequestAnimationFrame
-                    || window.mozRequestAnimationFrame
-                    || window.setTimeout;
+    function isJQuery(arg: HTMLElement | JQuery | NodeList): arg is JQuery  {
+        return (arg as JQuery).each !== undefined;
+    }
 
-    /**
-     * PolyFill of cancelAnimationFrame
-     * If cancelAnimationFrame is not available, using clearTimeout instead of it
-     */
-    var cancel_frame = window.cancelAnimationFrame
-                    || window.cancelRequestAnimationFrame
-                    || window.webkitCancelAnimationFrame
-                    || window.webkitCancelRequestAnimationFrame
-                    || window.mozCancelAnimationFrame
-                    || window.mozCancelRequestAnimationFrame
-                    || window.msCancelAnimationFrame
-                    || window.msCancelRequestAnimationFrame
-                    || window.oCancelAnimationFrame
-                    || window.oCancelRequestAnimationFrame
-                    || window.clearTimeout;
+    function isNodeList(arg: HTMLElement | JQuery | NodeList): arg is NodeList {
+        return (arg as NodeList).length !== undefined
+    }
+
+    const defaultOptions: IntersectionObserverInit = {
+        root: null,
+        rootMargin: "-50% 0px",
+        threshold: 0,
+    }
 
     class ScrollFire {
-        private trigger: {target: any, callback: Function}[] = []
+        private trigger: {target: HTMLElement | JQuery | NodeList, observer: IntersectionObserver}[] = []
         private _flag: boolean = false
-        private _id: number = 0
-        private padding: number = 100
 
         /**
          * Starting scroll fire action
          */
         public start(): ScrollFire {
+            if (this._flag) {
+                return this;
+            }
+
             this._flag = true
-            this._id = animation_frame(this.handler.bind(this))
+            this.observe();
             return this
         }
 
@@ -92,127 +45,89 @@ if (!Array.prototype.filter){
          * Stopping scroll fire action
          */
         public stop(): ScrollFire {
-            if (this._id) {
-                this._flag = false;
-                cancel_frame(this._id)
-                this._id = 0
+            if (!this._flag) {
+                return this;
             }
+
+            this._flag = false;
+            this.unobserve();
             return this
         }
+
         /**
          * Adding scroll fire trigger
          *
-         * @param Element | JQuery $target
-         * @param Function callback
+         * @param {HTMLElement | JQuery | NodeList} target
+         * @param {(el: HTMLElement | JQuery) => void} enterCallback
+         * @param {(el: HTMLElement | JQuery) => void} leaveCallback
          */
-        public addTrigger(target: Element | JQuery | NodeList, callback: Function): ScrollFire {
-            if((target as JQuery).each) {
-                (target as JQuery).each((i, el) => {
-                    this.trigger.push({
-                        target: jQuery(el),
-                        callback: callback
-                    });
-                });
-            } else if((target as NodeList).item) {
-                (target as NodeList).forEach((el) => {
-                    this.trigger.push({
-                        target: el,
-                        callback: callback
-                    });
-                })
-            } else {
-                this.trigger.push({
-                    target: target,
-                    callback: callback
-                });
-            }
-
-            return this
-        }
-
-        /**
-         * Checking finished trigger and disabling it
-         *
-         * @param number[] indexes
-         */
-        private finishTrigger(indexes: number[]): ScrollFire {
-            this.trigger =
-                this.trigger.filter((trigger, index) => {
-                    return indexes.indexOf(index) < 0
-                });
-
-            return this
-        }
-
-        /**
-         * Change trigger position's padding
-         *
-         * @param number padding
-         */
-        public changePadding(padding: number): ScrollFire {
-            this.padding = padding
-
-            return this
-        }
-
-        /**
-         * Checking scroll position and firing callback
-         */
-        private handler(): void {
-            if(this.trigger.length > 0) {
-                var scrollPos = document.documentElement.scrollTop || document.body.scrollTop;
-                var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-
-                var finishedTriggers = []
-
-                for(var i=0; i<this.trigger.length; i += 1) {
-                    var trigger = this.trigger[i];
-                    var pos = this.getOffsetTop(trigger.target);
-
-                    if((scrollPos+windowHeight/2) + this.padding > pos) {
-                        if(typeof trigger.callback === 'function') {
-                            trigger.callback(trigger.target);
-                            finishedTriggers.push(i);
+        public addTrigger(
+            target: HTMLElement | JQuery | NodeList,
+            enterCallback?: (el: HTMLElement | JQuery) => void,
+            leaveCallback?: (el: HTMLElement | JQuery) => void,
+            options: IntersectionObserverInit = {}
+        ): ScrollFire {
+            const isJQueryTarget = isJQuery(target);
+            const _options = {...defaultOptions, ...options};
+            const observer = new IntersectionObserver((entries) => {
+                entries.map(entry => {
+                    console.log(entry)
+                    if (entry.isIntersecting) {
+                        if (enterCallback) {
+                            enterCallback(isJQueryTarget ? jQuery(entry.target as HTMLElement) : entry.target as HTMLElement);
+                        }
+                    } else if (!entry.isIntersecting && entry.boundingClientRect.top > 0) {
+                        if (leaveCallback) {
+                            leaveCallback(isJQueryTarget ? jQuery(entry.target as HTMLElement) : entry.target as HTMLElement);
                         }
                     }
-                }
+                })
+            }, _options)
 
-                this.finishTrigger(finishedTriggers);
-            }
+            this.trigger.push({
+                target,
+                observer
+            });
 
-            if(this._flag) {
-                this._id = animation_frame(this.handler.bind(this));
-            }
+            return this
         }
 
         /**
-         * Get Element offset position of the page
-         *
-         * @param Element | jQuery Object element
-         * via: jQuery.offset()
+         * Start observe for each trigger
          */
-        private getOffsetTop(element: Element | JQuery) {
-            if(! element) {
-                return 0;
-            }
-
-            // For jQuery Object
-            if ((element as JQuery).offset && typeof (element as JQuery).offset === 'function') {
-                const pos = (element as JQuery).offset()
-                if(! pos) {
-                    return 0
+        private observe(): void {
+            this.trigger.map(({target, observer}) => {
+                if(isJQuery(target)) {
+                    target.each(function () {
+                        observer.observe(this)
+                    })
+                } else if(isNodeList(target)) {
+                    (target as NodeList).forEach((el) => {
+                        observer.observe(el as HTMLElement)
+                    })
+                } else {
+                    observer.observe(target);
                 }
-                return pos.top
-            }
+            })
+        }
 
-            if(! (element as Element).getClientRects().length) {
-                return 0;
-            }
-
-            var rect = (element as Element).getBoundingClientRect();
-            var win = (element as Element).ownerDocument.defaultView;
-
-            return rect.top + (win?.scrollY || 0);
+        /**
+         * Unobserve for each trigger
+         */
+        private unobserve(): void {
+            this.trigger.map(({target, observer}) => {
+                if(isJQuery(target)) {
+                    target.each(function () {
+                        observer.unobserve(this)
+                    })
+                } else if(isNodeList(target)) {
+                    (target as NodeList).forEach((el) => {
+                        observer.unobserve(el as HTMLElement)
+                    })
+                } else {
+                    observer.unobserve(target);
+                }
+            })
         }
     }
 

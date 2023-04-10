@@ -10,12 +10,15 @@ The class of method fired by scroll position.
 
 ```js
 var elem = document.querySelector('#foo');
-var someFunction = function(el) {
+var entryFunction = function(el) {
     el.classList.add('scroll-action');
+}
+var leaveFunction = function(el) {
+    el.classList.remove('scroll-action');
 }
 
 var fire = new ScrollFire();
-fire.addTrigger(elem, someFunction);
+fire.addTrigger(elem, entryFunction, leaveFunction);
 fire.start();
 ```
 
@@ -25,9 +28,15 @@ You can insert element as jQuery element.
 
 ```js
 var target = $('.something');
+var entryFunction = function($el) {
+    $el.addClass('scroll-action');
+}
+var leaveFunction = function($el) {
+    $el.removeClass('scroll-action');
+}
 
 var fire = new ScrollFire();
-fire.addTrigger(target, someFunction);
+fire.addTrigger(target, entryFunction, leaveFunction);
 fire.start();
 ```
 
@@ -36,10 +45,10 @@ fire.start();
 You can insert element as Vanilla JS element too.
 
 ```js
-var target = document.getElementById('target');
+var target = document.querySelectorAll('.target');
 
 var fire = new ScrollFire();
-fire.addTrigger(target, someFunction);
+fire.addTrigger(target, entryFunction, leaveFunction);
 fire.start();
 ```
 
@@ -49,8 +58,7 @@ You can use method chaining
 
 ```js
 new ScrollFire()
-    .changePadding(100)
-    .addTrigger(target, someFunction)
+    .addTrigger(target, entryFunction, leaveFunction)
     .start();
 ```
 
@@ -61,26 +69,37 @@ new ScrollFire()
 Adding scroll fire trigger
 
 ```js
-ScrollFire.addTrigger(target: Element | NodeList | JQuery, callback: Function) : ScrollFire
+ScrollFire.addTrigger(
+    target: HTMLElement | NodeList | JQuery,
+    entryFunction?: (el: HTMLElement | JQuery) => void,
+    leaveFunction?: (el: HTMLElement | JQuery) => void,
+    options?: IntersectionObserverInit
+) : ScrollFire
 ```
 
-Callback's first argument is passed `target`.
+Entry and Leave callback's first argument is passed `target`.
 
 
 #### e.g.
 
 ```js
 fire.addTrigger(target, function(el) {
-    console.log(target === el) // -> true
+    // el -> HTMLElement | JQuery
+}, function (el) {
+    // el -> HTMLElement | JQuery
 });
 ```
 
-### changePadding
+#### You can put IntersectionOvserver option to 4th parameter
 
-Change trigger position's padding
+Default value is like this
 
 ```js
-ScrollFire.changePadding(padding: number) : ScrollFire
+fire.addTrigger(target, entryFunction, leaveFunction, {
+    root: null,
+    rootMargin: "-50% 0px",
+    threshold: 0,
+});
 ```
 
 ### start

@@ -93,6 +93,8 @@ fire.start();</code></pre>
         var fire = new ScrollFire();
         fire.addTrigger(targets, function(el) {
             el.classList.add('block-view');
+        }, function(el) {
+            el.classList.remove('block-view');
         });
         fire.start();
     </script>

@@ -12,6 +12,10 @@
     transition: opacity .3s;
 }
 
+.block.is-small {
+    height: 100px;
+}
+
 .block-view {
     opacity: 1;
 }

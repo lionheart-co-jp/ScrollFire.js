@@ -66,19 +66,20 @@ var __assign = (this && this.__assign) || function () {
          * @param {(el: HTMLElement | JQuery) => void} enterCallback
          * @param {(el: HTMLElement | JQuery) => void} leaveCallback
          */
-        ScrollFire.prototype.addTrigger = function (target, enterCallback, leaveCallback, options) {
-            if (options === void 0) { options = {}; }
+        ScrollFire.prototype.addTrigger = function (target, enterCallback, leaveCallback, ratio) {
+            var _this = this;
+            if (ratio === void 0) { ratio = 50; }
             var isJQueryTarget = isJQuery(target);
-            var _options = __assign(__assign({}, defaultOptions), options);
+            var _options = __assign(__assign({}, defaultOptions), { rootMargin: "-".concat(ratio, "% 0px -").concat(100 - ratio, "% 0px") });
             var observer = new IntersectionObserver(function (entries) {
+                var threshold = _this.getThresholdTop(ratio);
                 entries.map(function (entry) {
-                    console.log(entry);
-                    if (entry.isIntersecting) {
+                    if (entry.isIntersecting || entry.boundingClientRect.bottom <= threshold) {
                         if (enterCallback) {
                             enterCallback(isJQueryTarget ? jQuery(entry.target) : entry.target);
                         }
                     }
-                    else if (!entry.isIntersecting && entry.boundingClientRect.top > 0) {
+                    else if (!entry.isIntersecting && entry.boundingClientRect.bottom > threshold) {
                         if (leaveCallback) {
                             leaveCallback(isJQueryTarget ? jQuery(entry.target) : entry.target);
                         }
@@ -132,6 +133,9 @@ var __assign = (this && this.__assign) || function () {
                     observer.unobserve(target);
                 }
             });
+        };
+        ScrollFire.prototype.getThresholdTop = function (ratio) {
+            return window.innerHeight * (ratio / 100);
         };
         return ScrollFire;
     }());

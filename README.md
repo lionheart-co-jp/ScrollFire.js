@@ -73,7 +73,7 @@ ScrollFire.addTrigger(
     target: HTMLElement | NodeList | JQuery,
     entryFunction?: (el: HTMLElement | JQuery) => void,
     leaveFunction?: (el: HTMLElement | JQuery) => void,
-    options?: IntersectionObserverInit
+    ratio?: number = 50 // Must be 0-100
 ) : ScrollFire
 ```
 
@@ -90,16 +90,12 @@ fire.addTrigger(target, function(el) {
 });
 ```
 
-#### You can put IntersectionOvserver option to 4th parameter
+#### You can put threshold ratio to 4th parameter
 
-Default value is like this
+If you put `25`, threshold is 25% from window top.
 
 ```js
-fire.addTrigger(target, entryFunction, leaveFunction, {
-    root: null,
-    rootMargin: "-50% 0px",
-    threshold: 0,
-});
+fire.addTrigger(target, entryFunction, leaveFunction, 25);
 ```
 
 ### start

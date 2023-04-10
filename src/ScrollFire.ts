@@ -6,7 +6,7 @@
  * fire.addTrigger(element, entryFunction, leaveFunction);
  * fire.start();
  *
- * @version 0.1.0
+ * @version 0.1.1
  */
 
 (function() {
@@ -65,18 +65,18 @@
             target: HTMLElement | JQuery | NodeList,
             enterCallback?: (el: HTMLElement | JQuery) => void,
             leaveCallback?: (el: HTMLElement | JQuery) => void,
-            options: IntersectionObserverInit = {}
+            ratio: number = 50
         ): ScrollFire {
             const isJQueryTarget = isJQuery(target);
-            const _options = {...defaultOptions, ...options};
+            const _options = {...defaultOptions, ...{rootMargin: `-${ratio}% 0px -${100-ratio}% 0px`}};
             const observer = new IntersectionObserver((entries) => {
+                const threshold = this.getThresholdTop(ratio);
                 entries.map(entry => {
-                    console.log(entry)
-                    if (entry.isIntersecting) {
+                    if (entry.isIntersecting || entry.boundingClientRect.bottom <= threshold) {
                         if (enterCallback) {
                             enterCallback(isJQueryTarget ? jQuery(entry.target as HTMLElement) : entry.target as HTMLElement);
                         }
-                    } else if (!entry.isIntersecting && entry.boundingClientRect.top > 0) {
+                    } else if (!entry.isIntersecting && entry.boundingClientRect.bottom > threshold) {
                         if (leaveCallback) {
                             leaveCallback(isJQueryTarget ? jQuery(entry.target as HTMLElement) : entry.target as HTMLElement);
                         }
@@ -128,6 +128,10 @@
                     observer.unobserve(target);
                 }
             })
+        }
+
+        private getThresholdTop(ratio: number): number {
+            return window.innerHeight * (ratio / 100);
         }
     }
 

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/demo03.css">
 </head>
 <body>
+    <div class="threshold"></div>
 
     <div class="wrapper">
         <h1>Demo 03</h1>
@@ -59,6 +60,8 @@
 var fire = new ScrollFire();
 fire.addTrigger(targets, function(el) {
     el.addClass(&#039;block-view&#039;);
+}, function(el) {
+    el.removeClass(&#039;block-view&#039;);
 });
 fire.start();</code></pre>
         <h3>CSS</h3>

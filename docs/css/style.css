@@ -17,12 +17,3 @@
     text-align: center;
     padding: 20px 0;
 }
-
-.threshold {
-    position: fixed;
-    left: 0;
-    top: 50%;
-    right: 0;
-    border-top: 1px dashed rgba(255, 0, 0, 0.5);
-    z-index: -1;
-}

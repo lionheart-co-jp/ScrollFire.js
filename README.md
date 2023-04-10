@@ -73,7 +73,7 @@ ScrollFire.addTrigger(
     target: HTMLElement | NodeList | JQuery,
     entryFunction?: (el: HTMLElement | JQuery) => void,
     leaveFunction?: (el: HTMLElement | JQuery) => void,
-    ratio?: number = 50 // Must be 0-100
+    options?: {root?: Element | Document | null, ratio?: number, debugThresholdView: boolean} = {root: null, ratio: 50, debugThresholdView: false }
 ) : ScrollFire
 ```
 
@@ -90,12 +90,20 @@ fire.addTrigger(target, function(el) {
 });
 ```
 
-#### You can put threshold ratio to 4th parameter
+#### Options
 
-If you put `25`, threshold is 25% from window top.
+`root` : Intersection testing element, if you put `null`, the top-level document's viewport is used
+
+`ratio` : Threshold percentage from top of testing element, must be `0-100`
+
+`debugThresholdView` : If you put `true`, threshold line will be drawn
 
 ```js
-fire.addTrigger(target, entryFunction, leaveFunction, 25);
+fire.addTrigger(target, entryFunction, leaveFunction, {
+    root: document.getElementById('#target'),
+    ratio: 20,
+    debugThresholdView: true,
+});
 ```
 
 ### start

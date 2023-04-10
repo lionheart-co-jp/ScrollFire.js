@@ -4,21 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Demo03 | ScrollFire</title>
+    <title>Vanilla JS demo | ScrollFire</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/demo03.css">
+    <link rel="stylesheet" href="./css/vanilla.css">
 </head>
 <body>
-    <div class="threshold"></div>
-
     <div class="wrapper">
-        <h1>Demo 03</h1>
-
-        <p>Animation sample 01</p>
+        <h1>Vanilla JS Demo</h1>
 
         <ul class="block-list">
+            <li class="block is-small">
+                Scroll display block
+            </li>
             <li class="block">
                 Scroll display block
             </li>
@@ -55,13 +54,13 @@
 
         <h2>Source code</h2>
         <h3>JavaScript</h3>
-        <pre><code class="javascript">var targets = $(&#039;.block&#039;);
+        <pre><code class="javascript">var targets = document.querySelectorAll(&#039;.block&#039;);
 
 var fire = new ScrollFire();
 fire.addTrigger(targets, function(el) {
-    el.addClass(&#039;block-view&#039;);
+    el.classList.add(&#039;block-view&#039;);
 }, function(el) {
-    el.removeClass(&#039;block-view&#039;);
+    el.classList.remove(&#039;block-view&#039;);
 });
 fire.start();</code></pre>
         <h3>CSS</h3>
@@ -73,42 +72,32 @@ fire.start();</code></pre>
     justify-content: center;
     list-style: none;
     margin: 0;
-    opacity: 0;
     padding: 0;
-    transition: .3s;
     width: 100%;
+    opacity: 0;
+    transition: opacity .3s;
 }
-.block:nth-child(odd) {
-    transform: translateX(-100px);
-}
-.block:nth-child(even) {
-    transform: translateX(100px);
-}
-.block-view:nth-child(n) {
+
+.block-view {
     opacity: 1;
-    transform: translateX(0);
 }</code></pre>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/css.min.js"></script>
-    <script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
     <script src="./js/ScrollFire.min.js"></script>
     <script>
         hljs.initHighlightingOnLoad();
 
-        var targets = $('.block');
+        var targets = document.querySelectorAll('.block');
 
         var fire = new ScrollFire();
         fire.addTrigger(targets, function(el) {
-            el.addClass('block-view');
+            el.classList.add('block-view');
         }, function(el) {
-            el.removeClass('block-view');
-        });
+            el.classList.remove('block-view');
+        }, { debugThresholdView: true });
         fire.start();
     </script>
 </body>

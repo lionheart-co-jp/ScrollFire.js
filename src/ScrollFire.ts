@@ -6,8 +6,14 @@
  * fire.addTrigger(element, entryFunction, leaveFunction);
  * fire.start();
  *
- * @version 0.1.1
+ * @version 0.1.2
  */
+
+type TriggerOption = {
+    root: Element | Document | null,
+    ratio: number;
+    debugThresholdView: boolean;
+}
 
 (function() {
     function isJQuery(arg: HTMLElement | JQuery | NodeList): arg is JQuery  {
@@ -18,10 +24,10 @@
         return (arg as NodeList).length !== undefined
     }
 
-    const defaultOptions: IntersectionObserverInit = {
+    const defaultOptions: TriggerOption = {
         root: null,
-        rootMargin: "-50% 0px",
-        threshold: 0,
+        ratio: 50,
+        debugThresholdView: false,
     }
 
     class ScrollFire {
@@ -65,12 +71,13 @@
             target: HTMLElement | JQuery | NodeList,
             enterCallback?: (el: HTMLElement | JQuery) => void,
             leaveCallback?: (el: HTMLElement | JQuery) => void,
-            ratio: number = 50
+            options: Partial<TriggerOption> = {}
         ): ScrollFire {
             const isJQueryTarget = isJQuery(target);
-            const _options = {...defaultOptions, ...{rootMargin: `-${ratio}% 0px -${100-ratio}% 0px`}};
+            const _options = { ...defaultOptions, ...options }
+            const intersectionOption: IntersectionObserverInit = {...{threshold: [0, 0.5, 1]}, ...{root: _options.root, rootMargin: `0px 0px -${100-_options.ratio}% 0px`}};
             const observer = new IntersectionObserver((entries) => {
-                const threshold = this.getThresholdTop(ratio);
+                const threshold = this.getThresholdTop(_options.ratio);
                 entries.map(entry => {
                     if (entry.isIntersecting || entry.boundingClientRect.bottom <= threshold) {
                         if (enterCallback) {
@@ -82,12 +89,24 @@
                         }
                     }
                 })
-            }, _options)
+            }, intersectionOption)
 
             this.trigger.push({
                 target,
                 observer
             });
+
+            if (_options.debugThresholdView) {
+                const debugView = document.createElement('span');
+                debugView.style.display = 'block';
+                debugView.style.position = 'fixed';
+                debugView.style.left = '0';
+                debugView.style.right = '0';
+                debugView.style.top = `${_options.ratio}%`;
+                debugView.style.borderTop = '1px dashed rgba(255, 0, 0, 0.5)';
+                debugView.style.pointerEvents = 'none';
+                document.body.appendChild(debugView);
+            }
 
             return this
         }

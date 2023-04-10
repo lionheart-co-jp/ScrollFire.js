@@ -4,19 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Demo01 | ScrollFire</title>
+    <title>Change Threshold Ratio | ScrollFire</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/demo01.css">
+    <link rel="stylesheet" href="./css/vanilla.css">
 </head>
 <body>
-    <div class="threshold"></div>
-
     <div class="wrapper">
-        <h1>Demo 01</h1>
-
-        <p>Vanilla JS Demo</p>
+        <h1>Change Threshold Ratio</h1>
 
         <ul class="block-list">
             <li class="block is-small">
@@ -65,7 +61,7 @@ fire.addTrigger(targets, function(el) {
     el.classList.add(&#039;block-view&#039;);
 }, function(el) {
     el.classList.remove(&#039;block-view&#039;);
-});
+}, { ratio: 15 });
 fire.start();</code></pre>
         <h3>CSS</h3>
         <pre><code class="css">.block {
@@ -101,7 +97,7 @@ fire.start();</code></pre>
             el.classList.add('block-view');
         }, function(el) {
             el.classList.remove('block-view');
-        });
+        }, { ratio: 15, debugThresholdView: true });
         fire.start();
     </script>
 </body>

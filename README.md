@@ -73,7 +73,11 @@ ScrollFire.addTrigger(
     target: HTMLElement | NodeList | JQuery,
     entryFunction?: (el: HTMLElement | JQuery) => void,
     leaveFunction?: (el: HTMLElement | JQuery) => void,
-    options?: {root?: Element | Document | null, ratio?: number, debugThresholdView: boolean} = {root: null, ratio: 50, debugThresholdView: false }
+    options?: {
+        root?: Element | Document | null,
+        ratio?: number,
+        debugThresholdView?: boolean
+    } = {root: null, ratio: 50, debugThresholdView: false }
 ) : ScrollFire
 ```
 

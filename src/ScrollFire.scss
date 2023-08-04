@@ -1,0 +1,74 @@
+@media screen {
+  [data-scroll-fire] {
+    --scroll-fire-duration: 0.3s;
+    --scroll-fire-distance: 100px;
+  }
+
+  @for $i from 0 through 60 {
+    body[data-scroll-fire-delay="#{$i * 50}"] [data-scroll-fire],
+    [data-scroll-fire][data-scroll-fire-delay="#{$i * 50}"] {
+      --scroll-fire-delay: #{$i * 50}ms;
+    }
+    body[data-scroll-fire-duration="#{$i * 50}"] [data-scroll-fire],
+    [data-scroll-fire][data-scroll-fire-duration="#{$i * 50}"] {
+      --scroll-fire-duration: #{$i * 50}ms;
+    }
+  }
+
+  [data-scroll-fire^="fade"] {
+    opacity: 0;
+    transition-property: opacity, transform;
+    transition-delay: var(--scroll-fire-delay, 0);
+    transition-duration: var(--scroll-fire-duration);
+    will-change: opacity, transform;
+
+    &[data-scroll-fire-animate] {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  [data-scroll-fire="fade-up"] {
+    transform: translateY(var(--scroll-fire-distance));
+  }
+
+  [data-scroll-fire="fade-down"] {
+    transform: translateY(calc(var(--scroll-fire-distance) * -1));
+  }
+
+  [data-scroll-fire="fade-left"] {
+    transform: translateX(var(--scroll-fire-distance));
+  }
+
+  [data-scroll-fire="fade-right"] {
+    transform: translateX(calc(var(--scroll-fire-distance) * -1));
+  }
+
+  [data-scroll-fire="fade-up-left"] {
+    transform: translate(
+      var(--scroll-fire-distance),
+      var(--scroll-fire-distance)
+    );
+  }
+
+  [data-scroll-fire="fade-up-right"] {
+    transform: translate(
+      calc(var(--scroll-fire-distance) * -1),
+      var(--scroll-fire-distance)
+    );
+  }
+
+  [data-scroll-fire="fade-down-left"] {
+    transform: translate(
+      var(--scroll-fire-distance),
+      calc(var(--scroll-fire-distance) * -1)
+    );
+  }
+
+  [data-scroll-fire="fade-down-right"] {
+    transform: translate(
+      calc(var(--scroll-fire-distance) * -1),
+      calc(var(--scroll-fire-distance) * -1)
+    );
+  }
+}

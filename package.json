@@ -1,16 +1,17 @@
 {
-  "name": "scrollfire",
-  "version": "0.1.2",
-  "main": "index.js",
+  "name": "scrollfire-js",
+  "version": "0.2.0",
+  "type": "module",
   "license": "MIT",
   "scripts": {
-    "build": "tsc && npm run compress && npm run docs",
-    "compress": "uglifyjs ./dist/ScrollFire.js -o ./dist/ScrollFire.min.js -c -m --source-map",
-    "docs": "cp dist/ScrollFire.min.js docs/js/ScrollFire.min.js"
+    "dev": "vite",
+    "build": "tsc && vite build && npm run docs",
+    "docs": "cp dist/ScrollFire.umd.cjs docs/js/ScrollFire.min.js && cp dist/ScrollFire.css docs/css/ScrollFire.css"
   },
   "devDependencies": {
     "@types/jquery": "^3.5.16",
-    "typescript": "^5.0.4",
-    "uglify-js": "^3.17.4"
+    "sass": "^1.64.2",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
   }
 }

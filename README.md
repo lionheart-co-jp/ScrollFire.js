@@ -8,6 +8,15 @@ The class of method fired by scroll position.
 
 ## How to use
 
+```html
+<link rel="stylesheet" href="./path/to/ScrollFire/ScrollFire.css" />
+<script src="./path/to/ScrollFire/ScrollFire.min.js"></script>
+```
+
+- You can download from `docs/ScrollFire` directory
+
+https://github.com/lionheart-co-jp/ScrollFire.js/tree/master/docs/ScrollFire
+
 ```js
 var elem = document.querySelector("#foo");
 var entryFunction = function (el) {

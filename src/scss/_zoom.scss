@@ -1,0 +1,121 @@
+/**
+ * Zoom Animations
+ * zoom-in, zoom-in-up, zoom-in-down, zoom-in-left, zoom-in-right, zoom-in-up-left, zoom-in-up-right, zoom-in-down-left, zoom-in-down-right
+ * zoom-out, zoom-out-up, zoom-out-down, zoom-out-left, zoom-out-right, zoom-out-up-left, zoom-out-up-right, zoom-out-down-left, zoom-out-down-right
+ */
+[data-scroll-fire^="zoom"] {
+  opacity: 0;
+  transition-property: opacity, transform;
+  will-change: opacity, transform;
+
+  &[data-scroll-fire-animate] {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+[data-scroll-fire="zoom-in"] {
+  transform: translate(0, 0) scale(calc(1 - var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-in-up"] {
+  transform: translateY(var(--scroll-fire-distance))
+    scale(calc(1 - var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-in-down"] {
+  transform: translateY(calc(var(--scroll-fire-distance) * -1))
+    scale(calc(1 - var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-in-left"] {
+  transform: translateX(var(--scroll-fire-distance))
+    scale(calc(1 - var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-in-right"] {
+  transform: translateX(calc(var(--scroll-fire-distance) * -1))
+    scale(calc(1 - var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-in-up-left"] {
+  transform: translate(var(--scroll-fire-distance), var(--scroll-fire-distance))
+    scale(calc(1 - var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-in-up-right"] {
+  transform: translate(
+      calc(var(--scroll-fire-distance) * -1),
+      var(--scroll-fire-distance)
+    )
+    scale(calc(1 - var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-in-down-left"] {
+  transform: translate(
+      var(--scroll-fire-distance),
+      calc(var(--scroll-fire-distance) * -1)
+    )
+    scale(calc(1 - var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-in-down-right"] {
+  transform: translate(
+      calc(var(--scroll-fire-distance) * -1),
+      calc(var(--scroll-fire-distance) * -1)
+    )
+    scale(calc(1 - var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-out"] {
+  transform: translate(0, 0) scale(calc(1 + var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-out-up"] {
+  transform: translateY(var(--scroll-fire-distance))
+    scale(calc(1 + var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-out-down"] {
+  transform: translateY(calc(var(--scroll-fire-distance) * -1))
+    scale(calc(1 + var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-out-left"] {
+  transform: translateX(var(--scroll-fire-distance))
+    scale(calc(1 + var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-out-right"] {
+  transform: translateX(calc(var(--scroll-fire-distance) * -1))
+    scale(calc(1 + var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-out-up-left"] {
+  transform: translate(var(--scroll-fire-distance), var(--scroll-fire-distance))
+    scale(calc(1 + var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-out-up-right"] {
+  transform: translate(
+      calc(var(--scroll-fire-distance) * -1),
+      var(--scroll-fire-distance)
+    )
+    scale(calc(1 + var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-out-down-left"] {
+  transform: translate(
+      var(--scroll-fire-distance),
+      calc(var(--scroll-fire-distance) * -1)
+    )
+    scale(calc(1 + var(--scroll-fire-scale)));
+}
+
+[data-scroll-fire="zoom-out-down-right"] {
+  transform: translate(
+      calc(var(--scroll-fire-distance) * -1),
+      calc(var(--scroll-fire-distance) * -1)
+    )
+    scale(calc(1 + var(--scroll-fire-scale)));
+}

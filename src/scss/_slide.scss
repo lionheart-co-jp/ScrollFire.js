@@ -1,0 +1,58 @@
+/**
+ * Slide Animations
+ * slide-up, slide-down, slide-left, slide-right, slide-up-left, slide-up-right, slide-down-left, slide-down-right
+ */
+[data-scroll-fire^="slide"] {
+  transition-property: transform;
+  transition-delay: var(--scroll-fire-delay, 0);
+  transition-duration: var(--scroll-fire-duration);
+  will-change: transform;
+
+  &[data-scroll-fire-animate] {
+    transform: translate(0, 0);
+  }
+}
+
+[data-scroll-fire="slide-up"] {
+  transform: translateY(var(--scroll-fire-distance));
+}
+
+[data-scroll-fire="slide-down"] {
+  transform: translateY(calc(var(--scroll-fire-distance) * -1));
+}
+
+[data-scroll-fire="slide-left"] {
+  transform: translateX(var(--scroll-fire-distance));
+}
+
+[data-scroll-fire="slide-right"] {
+  transform: translateX(calc(var(--scroll-fire-distance) * -1));
+}
+
+[data-scroll-fire="slide-up-left"] {
+  transform: translate(
+    var(--scroll-fire-distance),
+    var(--scroll-fire-distance)
+  );
+}
+
+[data-scroll-fire="slide-up-right"] {
+  transform: translate(
+    calc(var(--scroll-fire-distance) * -1),
+    var(--scroll-fire-distance)
+  );
+}
+
+[data-scroll-fire="slide-down-left"] {
+  transform: translate(
+    var(--scroll-fire-distance),
+    calc(var(--scroll-fire-distance) * -1)
+  );
+}
+
+[data-scroll-fire="slide-down-right"] {
+  transform: translate(
+    calc(var(--scroll-fire-distance) * -1),
+    calc(var(--scroll-fire-distance) * -1)
+  );
+}

@@ -7,10 +7,14 @@
     <title>Vanilla JS demo | ScrollFire</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+    <link rel="stylesheet" href="./ScrollFire/ScrollFire.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/vanilla.css">
 </head>
-<body>
+<body
+    data-scroll-fire-debug-threshold-view
+    data-scroll-fire-debug-dummy-element-view
+>
     <div class="wrapper">
         <h1>Vanilla JS Demo</h1>
 
@@ -81,12 +85,14 @@ fire.start();</code></pre>
 .block-view {
     opacity: 1;
 }</code></pre>
+
+        <p><a href="./">Back to index</a></p>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/css.min.js"></script>
-    <script src="./js/ScrollFire.min.js"></script>
+    <script src="./ScrollFire/ScrollFire.min.js"></script>
     <script>
         hljs.initHighlightingOnLoad();
 
@@ -97,7 +103,7 @@ fire.start();</code></pre>
             el.classList.add('block-view');
         }, function(el) {
             el.classList.remove('block-view');
-        }, { debugThresholdView: true });
+        });
         fire.start();
     </script>
 </body>

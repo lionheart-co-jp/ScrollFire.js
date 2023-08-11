@@ -1,0 +1,17 @@
+.block {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.block__child {
+  align-items: center;
+  background: #eee;
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}

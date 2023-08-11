@@ -6,12 +6,12 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && npm run docs",
-    "docs": "cp dist/ScrollFire.umd.cjs docs/js/ScrollFire.min.js && cp dist/ScrollFire.css docs/css/ScrollFire.css"
+    "docs": "cp dist/ScrollFire.umd.cjs docs/ScrollFire/ScrollFire.min.js && cp dist/ScrollFire.css docs/ScrollFire/ScrollFire.css"
   },
   "devDependencies": {
     "@types/jquery": "^3.5.16",
-    "sass": "^1.64.2",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "sass": "^1.65.1",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.9"
   }
 }

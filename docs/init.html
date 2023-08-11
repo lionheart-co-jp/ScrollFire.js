@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Animation sample 01 | ScrollFire</title>
+    <title>Initial animation demo | ScrollFire</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
-    <link rel="stylesheet" href="./css/ScrollFire.css">
+    <link rel="stylesheet" href="./ScrollFire/ScrollFire.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/init.css">
 </head>
-<body>
+<body
+    data-scroll-fire-debug-threshold-view
+    data-scroll-fire-debug-dummy-element-view
+>
     <div class="wrapper">
-        <h1>Animation sample 01</h1>
+        <h1>Initial animation demo</h1>
+
+        <h2>Fade</h2>
 
         <ul class="block-list">
             <li class="block" data-scroll-fire="fade">
@@ -45,43 +50,231 @@
             </li>
         </ul>
 
+        <h2>Zoom</h2>
+
+        <ul class="block-list">
+            <li class="block" data-scroll-fire="zoom-in">
+                zoom-in
+            </li>
+            <li class="block" data-scroll-fire="zoom-in-up">
+                zoom-in-up
+            </li>
+            <li class="block" data-scroll-fire="zoom-in-down">
+                zoom-in-down
+            </li>
+            <li class="block" data-scroll-fire="zoom-in-left">
+                zoom-in-left
+            </li>
+            <li class="block" data-scroll-fire="zoom-in-right">
+                zoom-in-right
+            </li>
+            <li class="block" data-scroll-fire="zoom-in-up-right">
+                zoom-in-up-right
+            </li>
+            <li class="block" data-scroll-fire="zoom-in-up-left">
+                zoom-in-up-left
+            </li>
+            <li class="block" data-scroll-fire="zoom-in-down-right">
+                zoom-in-down-right
+            </li>
+            <li class="block" data-scroll-fire="zoom-in-down-left">
+                zoom-in-down-left
+            </li>
+            <li class="block" data-scroll-fire="zoom-out">
+                zoom-out
+            </li>
+            <li class="block" data-scroll-fire="zoom-out-up">
+                zoom-out-up
+            </li>
+            <li class="block" data-scroll-fire="zoom-out-down">
+                zoom-out-down
+            </li>
+            <li class="block" data-scroll-fire="zoom-out-left">
+                zoom-out-left
+            </li>
+            <li class="block" data-scroll-fire="zoom-out-right">
+                zoom-out-right
+            </li>
+            <li class="block" data-scroll-fire="zoom-out-up-right">
+                zoom-out-up-right
+            </li>
+            <li class="block" data-scroll-fire="zoom-out-up-left">
+                zoom-out-up-left
+            </li>
+            <li class="block" data-scroll-fire="zoom-out-down-right">
+                zoom-out-down-right
+            </li>
+            <li class="block" data-scroll-fire="zoom-out-down-left">
+                zoom-out-down-left
+            </li>
+        </ul>
+
+        <h2>Slide</h2>
+
+        <ul class="block-list">
+            <li class="block" data-scroll-fire="slide-up">
+                slide-up
+            </li>
+            <li class="block" data-scroll-fire="slide-down">
+                slide-down
+            </li>
+            <li class="block" data-scroll-fire="slide-left">
+                slide-left
+            </li>
+            <li class="block" data-scroll-fire="slide-right">
+                slide-right
+            </li>
+            <li class="block" data-scroll-fire="slide-up-right">
+                slide-up-right
+            </li>
+            <li class="block" data-scroll-fire="slide-up-left">
+                slide-up-left
+            </li>
+            <li class="block" data-scroll-fire="slide-down-right">
+                slide-down-right
+            </li>
+            <li class="block" data-scroll-fire="slide-down-left">
+                slide-down-left
+            </li>
+        </ul>
+
         <p class="end">End</p>
 
         <h2>Source code</h2>
-        <h3>JavaScript</h3>
-        <pre><code class="javascript">var targets = $(&#039;.block&#039;);
+        <h3>HTML</h3>
+        <pre><code class="html">&lt;h2&gt;Fade&lt;/h2&gt;
 
-var fire = new ScrollFire();
-fire.addTrigger(targets, function(el) {
-    el.addClass(&#039;block-view&#039;);
-}, function(el) {
-    el.removeClass(&#039;block-view&#039;);
-});
-fire.start();</code></pre>
+&lt;ul class=&quot;block-list&quot;&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;fade&quot;&gt;
+        fade
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;fade-up&quot;&gt;
+        fade-up
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;fade-down&quot;&gt;
+        fade-down
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;fade-left&quot;&gt;
+        fade-left
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;fade-right&quot;&gt;
+        fade-right
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;fade-up-right&quot;&gt;
+        fade-up-right
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;fade-up-left&quot;&gt;
+        fade-up-left
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;fade-down-right&quot;&gt;
+        fade-down-right
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;fade-down-left&quot;&gt;
+        fade-down-left
+    &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Zoom&lt;/h2&gt;
+
+&lt;ul class=&quot;block-list&quot;&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-in&quot;&gt;
+        zoom-in
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-in-up&quot;&gt;
+        zoom-in-up
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-in-down&quot;&gt;
+        zoom-in-down
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-in-left&quot;&gt;
+        zoom-in-left
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-in-right&quot;&gt;
+        zoom-in-right
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-in-up-right&quot;&gt;
+        zoom-in-up-right
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-in-up-left&quot;&gt;
+        zoom-in-up-left
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-in-down-right&quot;&gt;
+        zoom-in-down-right
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-in-down-left&quot;&gt;
+        zoom-in-down-left
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-out&quot;&gt;
+        zoom-out
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-out-up&quot;&gt;
+        zoom-out-up
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-out-down&quot;&gt;
+        zoom-out-down
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-out-left&quot;&gt;
+        zoom-out-left
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-out-right&quot;&gt;
+        zoom-out-right
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-out-up-right&quot;&gt;
+        zoom-out-up-right
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-out-up-left&quot;&gt;
+        zoom-out-up-left
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-out-down-right&quot;&gt;
+        zoom-out-down-right
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;zoom-out-down-left&quot;&gt;
+        zoom-out-down-left
+    &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Slide&lt;/h2&gt;
+
+&lt;ul class=&quot;block-list&quot;&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;slide-up&quot;&gt;
+        slide-up
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;slide-down&quot;&gt;
+        slide-down
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;slide-left&quot;&gt;
+        slide-left
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;slide-right&quot;&gt;
+        slide-right
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;slide-up-right&quot;&gt;
+        slide-up-right
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;slide-up-left&quot;&gt;
+        slide-up-left
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;slide-down-right&quot;&gt;
+        slide-down-right
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot; data-scroll-fire=&quot;slide-down-left&quot;&gt;
+        slide-down-left
+    &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
         <h3>CSS</h3>
         <pre><code class="css">.block {
-    align-items: center;
-    background: #eee;
-    display: flex;
-    height: 400px;
-    justify-content: center;
-    list-style: none;
-    margin: 0;
-    opacity: 0;
-    padding: 0;
-    transition: .3s;
-    width: 100%;
-}
-.block:nth-child(odd) {
-    transform: translateX(-100px);
-}
-.block:nth-child(even) {
-    transform: translateX(100px);
-}
-.block-view:nth-child(n) {
-    opacity: 1;
-    transform: translateX(0);
+  align-items: center;
+  background: #eee;
+  display: flex;
+  height: 400px;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }</code></pre>
+
+        <p><a href="./">Back to index</a></p>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
@@ -91,7 +284,7 @@ fire.start();</code></pre>
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
-    <script src="./js/ScrollFire.min.js"></script>
+    <script src="./ScrollFire/ScrollFire.min.js"></script>
     <script>
         hljs.initHighlightingOnLoad();
     </script>

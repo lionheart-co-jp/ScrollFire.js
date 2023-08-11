@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Initial animation Delay demo | ScrollFire</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+    <link rel="stylesheet" href="./ScrollFire/ScrollFire.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/init-delay.css">
+</head>
+<body
+    data-scroll-fire-debug-threshold-view
+    data-scroll-fire-debug-dummy-element-view
+>
+    <div class="wrapper">
+        <h1>Initial animation Delay demo</h1>
+
+        <ul class="block-list">
+            <li class="block">
+                <div class="block__child" data-scroll-fire="fade">Delay 0ms</div>
+                <div class="block__child" data-scroll-fire="fade">Delay 0ms</div>
+                <div class="block__child" data-scroll-fire="fade">Delay 0ms</div>
+            </li>
+            <li class="block">
+                <div class="block__child" data-scroll-fire="fade">Delay 0ms</div>
+                <div class="block__child" data-scroll-fire="fade" data-scroll-fire-delay="100">Delay 100ms</div>
+                <div class="block__child" data-scroll-fire="fade" data-scroll-fire-delay="200">Delay 200ms</div>
+            </li>
+            <li class="block">
+                <div class="block__child" data-scroll-fire="fade" data-scroll-fire-delay="2000">Delay 2000ms</div>
+                <div class="block__child" data-scroll-fire="fade" data-scroll-fire-delay="1000">Delay 1000ms</div>
+                <div class="block__child" data-scroll-fire="fade">Delay 0ms</div>
+            </li>
+        </ul>
+
+        <p class="end">End</p>
+
+        <h2>Source code</h2>
+        <h3>HTML</h3>
+        <pre><code class="html">&lt;ul class=&quot;block-list&quot;&gt;
+    &lt;li class=&quot;block&quot;&gt;
+        &lt;div class=&quot;block__child&quot; data-scroll-fire=&quot;fade&quot;&gt;Delay 0ms&lt;/div&gt;
+        &lt;div class=&quot;block__child&quot; data-scroll-fire=&quot;fade&quot;&gt;Delay 0ms&lt;/div&gt;
+        &lt;div class=&quot;block__child&quot; data-scroll-fire=&quot;fade&quot;&gt;Delay 0ms&lt;/div&gt;
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot;&gt;
+        &lt;div class=&quot;block__child&quot; data-scroll-fire=&quot;fade&quot;&gt;Delay 0ms&lt;/div&gt;
+        &lt;div class=&quot;block__child&quot; data-scroll-fire=&quot;fade&quot; data-scroll-fire-delay=&quot;100&quot;&gt;Delay 100ms&lt;/div&gt;
+        &lt;div class=&quot;block__child&quot; data-scroll-fire=&quot;fade&quot; data-scroll-fire-delay=&quot;200&quot;&gt;Delay 200ms&lt;/div&gt;
+    &lt;/li&gt;
+    &lt;li class=&quot;block&quot;&gt;
+        &lt;div class=&quot;block__child&quot; data-scroll-fire=&quot;fade&quot; data-scroll-fire-delay=&quot;2000&quot;&gt;Delay 2000ms&lt;/div&gt;
+        &lt;div class=&quot;block__child&quot; data-scroll-fire=&quot;fade&quot; data-scroll-fire-delay=&quot;1000&quot;&gt;Delay 1000ms&lt;/div&gt;
+        &lt;div class=&quot;block__child&quot; data-scroll-fire=&quot;fade&quot;&gt;Delay 0ms&lt;/div&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        <h3>CSS</h3>
+        <pre><code class="css">.block {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.block__child {
+  align-items: center;
+  background: #eee;
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}</code></pre>
+
+        <p><a href="./">Back to index</a></p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/css.min.js"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="./ScrollFire/ScrollFire.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+</html>

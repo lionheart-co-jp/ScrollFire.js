@@ -1,0 +1,11 @@
+.block {
+  align-items: center;
+  background: #eee;
+  display: flex;
+  height: 400px;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}

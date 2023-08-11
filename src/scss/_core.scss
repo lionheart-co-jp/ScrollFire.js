@@ -1,0 +1,12 @@
+[data-scroll-fire] {
+  --scroll-fire-duration: 0.3s;
+  --scroll-fire-distance: 100px;
+  --scroll-fire-scale: 0.4;
+
+  transition-delay: var(--scroll-fire-delay, 0);
+  transition-duration: var(--scroll-fire-duration);
+
+  &:not([data-scroll-fire-animate]) {
+    pointer-events: none;
+  }
+}

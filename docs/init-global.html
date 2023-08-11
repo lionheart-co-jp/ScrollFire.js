@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Initial animation Global demo | ScrollFire</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai.min.css">
+    <link rel="stylesheet" href="./ScrollFire/ScrollFire.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/init-global.css">
+</head>
+<body
+    data-scroll-fire-debug-threshold-view
+    data-scroll-fire-debug-dummy-element-view
+    data-scroll-fire-delay="1000"
+    data-scroll-fire-duration="1000"
+    data-scroll-fire-scale="1"
+    data-scroll-fire-not-reverse
+    data-scroll-fire-ratio="80"
+>
+    <div class="wrapper">
+        <h1>Initial animation Global demo</h1>
+
+        <h2>Delay</h2>
+
+        <ul class="block-list">
+            <li class="block">
+                <div class="block__child" data-scroll-fire="fade">Delay Global 1000ms</div>
+                <div class="block__child" data-scroll-fire="fade">Delay Global 1000ms</div>
+                <div class="block__child" data-scroll-fire="fade">Delay Global 1000ms</div>
+            </li>
+            <li class="block">
+                <div class="block__child" data-scroll-fire="fade">Delay Global 1000ms</div>
+                <div class="block__child" data-scroll-fire="fade" data-scroll-fire-delay="0">Delay Overwrite 0ms</div>
+                <div class="block__child" data-scroll-fire="fade" data-scroll-fire-delay="500">Delay Overwrite 500ms</div>
+            </li>
+            <li class="block">
+                <div class="block__child" data-scroll-fire="fade">Delay Global 1000ms</div>
+                <div class="block__child" data-scroll-fire="fade">Delay Global 1000ms</div>
+                <div class="block__child" data-scroll-fire="fade">Delay Global 1000ms</div>
+            </li>
+        </ul>
+
+        <h2>Duration</h2>
+
+        <ul class="block-list">
+            <li class="block">
+                <div class="block__child" data-scroll-fire="fade">Duration Global 1000ms</div>
+                <div class="block__child" data-scroll-fire="fade">Duration Global 1000ms</div>
+                <div class="block__child" data-scroll-fire="fade">Duration Global 1000ms</div>
+            </li>
+            <li class="block">
+                <div class="block__child" data-scroll-fire="fade">Duration Global 1000ms</div>
+                <div class="block__child" data-scroll-fire="fade" data-scroll-fire-duration="100">Duration Overwrite 100ms</div>
+                <div class="block__child" data-scroll-fire="fade" data-scroll-fire-duration="500">Duration Overwrite 500ms</div>
+            </li>
+            <li class="block">
+                <div class="block__child" data-scroll-fire="fade">Duration Global 1000ms</div>
+                <div class="block__child" data-scroll-fire="fade">Duration Global 1000ms</div>
+                <div class="block__child" data-scroll-fire="fade">Duration Global 1000ms</div>
+            </li>
+        </ul>
+
+        <h2>Scale</h2>
+
+        <ul class="block-list">
+            <li class="block">
+                <div class="block__child" data-scroll-fire="zoom-in">Scale Global 1</div>
+                <div class="block__child" data-scroll-fire="zoom-in">Scale Global 1</div>
+                <div class="block__child" data-scroll-fire="zoom-in">Scale Global 1</div>
+            </li>
+            <li class="block">
+                <div class="block__child" data-scroll-fire="zoom-in">Scale Global 1</div>
+                <div class="block__child" data-scroll-fire="zoom-in" data-scroll-fire-scale="0.2">Scale Overwrite 0.2</div>
+                <div class="block__child" data-scroll-fire="zoom-in" data-scroll-fire-scale="0.5">Scale Overwrite 0.5</div>
+            </li>
+            <li class="block">
+                <div class="block__child" data-scroll-fire="zoom-in">Scale Global 1</div>
+                <div class="block__child" data-scroll-fire="zoom-in">Scale Global 1</div>
+                <div class="block__child" data-scroll-fire="zoom-in">Scale Global 1</div>
+            </li>
+        </ul>
+
+        <p class="end">End</p>
+
+        <h2>Source code</h2>
+        <h3>HTML</h3>
+        <pre><code class="html">&lt;body
+    data-scroll-fire-delay=&quot;1000&quot;
+    data-scroll-fire-duration=&quot;1000&quot;
+    data-scroll-fire-scale=&quot;1&quot;
+    data-scroll-fire-not-reverse
+    data-scroll-fire-ratio=&quot;80&quot;
+
+    data-scroll-fire-debug-threshold-view
+    data-scroll-fire-debug-dummy-element-view
+&gt;</code></pre>
+        <h3>CSS</h3>
+        <pre><code class="css">.block {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.block__child {
+  align-items: center;
+  background: #eee;
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}</code></pre>
+
+        <p><a href="./">Back to index</a></p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/css.min.js"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="./ScrollFire/ScrollFire.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
+</body>
+</html>

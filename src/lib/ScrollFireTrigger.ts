@@ -2,6 +2,7 @@ import { TriggerOption } from "../types/TriggerOption";
 import { isJQuery } from "../util/isJQuery";
 import { isNodeList } from "../util/isNodeList";
 import { getDataAttributeAsNumber } from "../util/getDataAttributeAsNumber";
+import { v4 as uuidv4 } from "uuid";
 
 /**
  * ScrollFireTrigger default option value
@@ -110,7 +111,7 @@ export class ScrollFireTrigger<T extends HTMLElement | JQuery> {
    * @returns {HTMLElement}
    */
   private createDummyElement(target: HTMLElement): HTMLElement {
-    const uuid = self.crypto.randomUUID();
+    const uuid = uuidv4();
     const dummyElement = document.createElement("span");
     dummyElement.dataset.scrollFireDummy = uuid;
     target.dataset.scrollFireTarget = uuid;

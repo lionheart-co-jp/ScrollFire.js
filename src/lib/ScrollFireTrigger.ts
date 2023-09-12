@@ -48,6 +48,9 @@ export class ScrollFireTrigger<T extends HTMLElement | JQuery> {
   /** @var {IntersectionObserver} intersectionObserver */
   private intersectionObserver: IntersectionObserver;
 
+  /** @var {ResizeObserver} resizeObserver */
+  private resizeObserver: ResizeObserver;
+
   /**
    * @param {HTMLElement | JQuery | NodeList} target
    * @param {(el: T) => void} enterCallback
@@ -87,7 +90,8 @@ export class ScrollFireTrigger<T extends HTMLElement | JQuery> {
     // Prepare dummy element for intersection observer
     this.prepareDummyElement();
 
-    this.intersectionObserver = this.prepareObserverInstance();
+    this.intersectionObserver = this.prepareIntersectionObserverInstance();
+    this.resizeObserver = this.prepareResizeOvserverInstance();
     this.prepareDebugView();
   }
 
@@ -150,12 +154,12 @@ export class ScrollFireTrigger<T extends HTMLElement | JQuery> {
   }
 
   /**
-   * Prepare observer instance
+   * Prepare intersection observer instance
    *
    * @private
    * @returns {IntersectionObserver}
    */
-  private prepareObserverInstance(): IntersectionObserver {
+  private prepareIntersectionObserverInstance(): IntersectionObserver {
     const isJQueryTarget = isJQuery(this.target);
     return new IntersectionObserver((entries) => {
       const threshold = this.getThresholdTop(this.options.ratio);
@@ -192,6 +196,18 @@ export class ScrollFireTrigger<T extends HTMLElement | JQuery> {
   }
 
   /**
+   * Prepare resize observer instance
+   *
+   * @private
+   * @returns {ResizeObserver}
+   */
+  private prepareResizeOvserverInstance(): ResizeObserver {
+    return new ResizeObserver(() => {
+      this.resetDummyElementPosition();
+    });
+  }
+
+  /**
    * Prepare debug threshold line
    * If `debugThresholdView` option is true, debug threshold line will be shown
    *
@@ -222,6 +238,7 @@ export class ScrollFireTrigger<T extends HTMLElement | JQuery> {
       );
       if (dummyElement) {
         this.intersectionObserver.observe(dummyElement);
+        this.resizeObserver.observe(dummyElement);
       }
     });
   }
@@ -238,6 +255,7 @@ export class ScrollFireTrigger<T extends HTMLElement | JQuery> {
       );
       if (dummyElement) {
         this.intersectionObserver.unobserve(el);
+        this.resizeObserver.unobserve(el);
       }
     });
   }

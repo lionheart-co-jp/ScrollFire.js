@@ -1,6 +1,8 @@
 import type { TriggerOption } from "../types/TriggerOption";
 import { ScrollFireTrigger } from "./ScrollFireTrigger";
 
+import { customResizeEvent } from "../util/event";
+
 export class ScrollFire {
   /** @var {ScrollFireTrigger<any>[]} trigger Added Trigger list */
   private trigger: ScrollFireTrigger<any>[] = [];
@@ -74,6 +76,7 @@ export class ScrollFire {
 
     window.addEventListener("resize", this._listner);
     window.addEventListener("load", this._listner);
+    window.addEventListener("scrollFireResizeEvent", this._listner);
     this._listner();
   }
 
@@ -88,6 +91,7 @@ export class ScrollFire {
 
     window.removeEventListener("resize", this._listner);
     window.removeEventListener("load", this._listner);
+    window.removeEventListener("scrollFireResizeEvent", this._listner);
   }
 
   /**
@@ -98,5 +102,15 @@ export class ScrollFire {
    */
   public onResize() {
     this.trigger.forEach((trigger) => trigger.resetDummyElementPosition());
+  }
+
+  /**
+   * Force dispatch resize event
+   * This method is used for when trigger element is added dynamically
+   *
+   * @returns {void}
+   */
+  static forceResize(): void {
+    window.dispatchEvent(customResizeEvent);
   }
 }

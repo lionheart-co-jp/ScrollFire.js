@@ -3,7 +3,7 @@ export const getDataAttributeAsNumber = (
   dataKey: string,
   _default: number | null = null
 ) => {
-  if (!(dataKey in target.dataset)) {
+  if (!target || !(dataKey in target.dataset)) {
     return _default;
   }
 

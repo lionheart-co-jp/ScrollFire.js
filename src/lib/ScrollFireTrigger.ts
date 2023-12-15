@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from "uuid";
  * ScrollFireTrigger default option value
  * some options can be set by data attribute
  */
-const defaultOptions: TriggerOption = {
+const defaultOptions = (): TriggerOption => ({
   root: null,
   ratio: getDataAttributeAsNumber(
     document.body,
@@ -21,7 +21,7 @@ const defaultOptions: TriggerOption = {
   debugDummyElementView:
     document.body.dataset["scrollFireDebugDummyElementView"] !== undefined,
   debugDummyElementViewColor: "rgba(0, 0, 255, 0.5)",
-};
+});
 
 export class ScrollFireTrigger<T extends HTMLElement | JQuery> {
   /** @var {HTMLElement | JQuery | NodeList} target Animation target Element */
@@ -66,7 +66,7 @@ export class ScrollFireTrigger<T extends HTMLElement | JQuery> {
     this.target = target;
     this.enterCallback = enterCallback;
     this.leaveCallback = leaveCallback;
-    this.options = { ...defaultOptions, ...options };
+    this.options = { ...defaultOptions(), ...options };
     this.rootElement = (this.options.root || document.body) as HTMLElement;
     this.intersectionOption = {
       ...{ threshold: [0, 0.5, 1] },

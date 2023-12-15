@@ -58,12 +58,16 @@ window.addEventListener("DOMContentLoaded", () => {
     .addTrigger<HTMLElement>(
       targets,
       (el) => {
+        if (!el) {
+          return;
+        }
         return (el.dataset["scrollFireAnimate"] = "active");
       },
       (el) => {
         if (
-          "scrollFireNotReverse" in document.body.dataset ||
-          "scrollFireNotReverse" in el.dataset
+          (document.body.dataset &&
+            "scrollFireNotReverse" in document.body.dataset) ||
+          (!!el && "scrollFireNotReverse" in el.dataset)
         ) {
           return;
         }

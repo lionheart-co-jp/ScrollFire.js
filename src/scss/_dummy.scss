@@ -6,13 +6,24 @@
   height: 1px !important;
   pointer-events: none !important;
   width: 100% !important;
-  overflow: hidden !important;
   background: none !important;
-  border-width: 0 !important;
   outline: none !important;
+  border-width: 0 !important;
+  transform: translateY(calc(var(--scroll-fire-ratio-top, 0) * -1)) !important;
 
   &[data-scroll-fire-dummy-view] {
-    border-style: dashed !important;
-    border-top-width: 1px !important;
+    &::before {
+      content: "" !important;
+      display: block !important;
+      position: absolute !important;
+      left: 0 !important;
+      top: 0 !important;
+      width: 100% !important;
+      border-color: inherit !important;
+      border-style: dashed !important;
+      border-width: 0 !important;
+      border-top-width: 1px !important;
+      transform: translateY(var(--scroll-fire-ratio-top, 0)) !important;
+    }
   }
 }

@@ -72,7 +72,7 @@ export class ScrollFireTrigger<T extends HTMLElement | JQuery> {
       ...{ threshold: [0, 0.5, 1] },
       ...{
         root: this.options.root,
-        rootMargin: `0px 0px -${100 - this.options.ratio}% 0px`,
+        rootMargin: `0px 0px -50% 0px`,
       },
     };
 
@@ -150,6 +150,10 @@ export class ScrollFireTrigger<T extends HTMLElement | JQuery> {
       const elementPosition = this.adjustedBoundingRect(el);
 
       dummyElement.style.top = `${elementPosition.top - dummyPosition.top}px`;
+      dummyElement.style.setProperty(
+        "--scroll-fire-ratio-top",
+        `${(window.innerHeight * (this.options.ratio - 50)) / 100}px`
+      );
     });
   }
 
